@@ -5,4 +5,4 @@
               {applications,[kernel,stdlib]},
               {mod,{trie_app,[]}},
               {env,[]},
-              {modules,[trie_app,trie_sup]}]}.
+              {modules,[trie,trie_app,trie_sup]}]}.
