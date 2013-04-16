@@ -1,7 +1,7 @@
 trie-erl
 ========
 
-[![Build Status](https://travis-ci.org/mtchavez/trie-rb.png?branch=master)](https://travis-ci.org/mtchavez/trie-rb)
+[![Build Status](https://travis-ci.org/mtchavez/trie-erl.png?branch=master)](https://travis-ci.org/mtchavez/trie-erl)
 
 Fredkin trie algorithm in Erlang
 
