@@ -2,29 +2,23 @@
 -export ([init/0, insert/2]).
 
 init() ->
-    {root, dict:new()}.
+    dict:new().
 
-insert(Val, {Node, T}=Tree) ->
-    {Size, N} = case Node == root of
-        true ->
-            erlang:display("ROOT"),
-            {erlang:size(Val), Val};
-        false ->
-            {erlang:size(Node), Node}
-        end,
-
-    List = binary:bin_to_list(N),
+insert(Val, Dict) ->
+    Size = erlang:size(Val),
+    List = binary:bin_to_list(Val),
+    [Key|Tail] = List,
+    BinVal = binary:list_to_bin([Key]),
     if
         (Size == 1) ->
-            Tree;
+            dict:from_list([{BinVal, dict:new()}]);
         true ->
-            [Key|Tail] = List,
-            BinVal = binary:list_to_bin([Key]),
             TailVal = binary:list_to_bin(Tail),
-            case dict:is_key(Key, T) of
+            case dict:is_key(BinVal, Dict) of
                 true ->
-                    {BinVal, insert(Val, {TailVal, T})};
+                    Existing = dict:fetch(BinVal, Dict),
+                    dict:store(BinVal, insert(TailVal, Existing), Dict);
                 false ->
-                    {BinVal, insert(Val, {TailVal, dict:new()})}
+                    dict:store(BinVal, insert(TailVal, dict:new()), Dict)
             end
     end.
