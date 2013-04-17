@@ -34,6 +34,20 @@ dict:fetch_keys( dict:fetch(<<"t">>, T3) ).
 % [<<"e">>,<<"o">>]
 ```
 
+## Finding
+
+Using the same tree ```T3``` from the inserting example you can find as so
+
+```erlang
+% Found
+trie:find(<<"tea">>, T3).
+% {ok, <<"tea">>}
+
+% Not Found
+trie:find(<<"asdf">>, T3).
+$ {notfound, <<"asdf">>}
+```
+
 ## Tests
 
 Run using ```make test``` or ```rebar eunit```

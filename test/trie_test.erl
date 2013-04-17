@@ -24,3 +24,20 @@ insert_test() ->
             <<"t">>, T3))
         )
     ).
+
+find_test() ->
+    T1 = trie:init(),
+    T2 = trie:insert(<<"to">>, T1),
+    T3 = trie:insert(<<"tea">>, T2),
+
+    F1 = trie:find(<<"tea">>, T3),
+    ?assertEqual({ok, <<"tea">>}, F1),
+
+    F2 = trie:find(<<"team">>, T3),
+    ?assertEqual({notfound, <<"team">>}, F2),
+
+    F3 = trie:find(<<"te">>, T3),
+    ?assertEqual({ok, <<"te">>}, F3),
+
+    F4 = trie:find(<<"asdf">>, T3),
+    ?assertEqual({notfound, <<"asdf">>}, F4).
